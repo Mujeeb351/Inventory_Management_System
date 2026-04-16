@@ -9,7 +9,18 @@
 <body>
 <div class="container">
     <h1 class="text-center my-4">Products</h1>
-    <a class="btn btn-primary" href="/products/create">Create Product</a>
+<!--    <a class="btn btn-primary" href="/products/create">Create Product</a>-->
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <a class="btn btn-primary" href="/products/create">Create Product</a>
+        <form class="d-flex" method="get" action="/products/search">
+            <input class="form-control me-2"
+                   type="search"
+                   name="keyword"
+                   placeholder="Search by name or brand"
+                   th:value="${keyword}">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </nav>
 
     <table class="table">
         <thead>

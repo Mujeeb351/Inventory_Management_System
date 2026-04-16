@@ -185,4 +185,34 @@ public class ProductsController {
 
         return "redirect:/products";
     }
+
+    @GetMapping("/search")
+    public String searchProducts(@RequestParam(required = false) String keyword, Model model) {
+
+        List<Product> products;
+
+        try {
+            if (keyword == null || keyword.trim().isEmpty()) {
+                products = repo.findAll(Sort.by(Sort.Direction.ASC, "id"));
+            } else {
+                products = repo.findByNameContainingIgnoreCaseOrBrandContainingIgnoreCase(
+                        keyword.trim(), keyword.trim()
+                );
+            }
+
+            model.addAttribute("products", products);
+            model.addAttribute("keyword", keyword);
+
+        } catch (Exception ex) {
+            System.out.println("Search Exception: " + ex.getMessage());
+
+            model.addAttribute("errorMessage", "Something went wrong during search!");
+
+            // fallback data
+            products = repo.findAll(Sort.by(Sort.Direction.ASC, "id"));
+            model.addAttribute("products", products);
+        }
+
+        return "products/index";
+    }
 }
