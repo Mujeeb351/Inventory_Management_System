@@ -1,0 +1,7 @@
+To configure the application on your machine, please follow these steps:
+
+1. Update the database username and password in the application.properties file.
+2. Manually create a database named ims.
+3. Insert product details into the database manually (you can also add product details using the application).
+
+Thank you.
